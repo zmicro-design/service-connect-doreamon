@@ -1,0 +1,13 @@
+services:
+  connect-doreamon:
+    restart: always
+    image: whatwewant/connect-doreamon:${SERVICE_CONNECT_DOREAMON_IMAGE_VERSION}
+    environment:
+      PORT: $SERVICE_CONNECT_DOREAMON_PORT
+      USERNAME: ${SERVICE_CONNECT_DOREAMON_USERNAME}
+      PASSWORD: ${SERVICE_CONNECT_DOREAMON_PASSWORD}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress

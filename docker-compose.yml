@@ -1,0 +1,23 @@
+services:
+  connect-doreamon:
+    restart: always
+    container_name: $SERVICE_NAME
+    image: whatwewant/connect-doreamon:${SERVICE_CONNECT_DOREAMON_IMAGE_VERSION}
+    # ports:
+    #   - 0.0.0.0:${SERVICE_CONNECT_DOREAMON_PORT}:${SERVICE_CONNECT_DOREAMON_PORT}
+    command: gzterminal server --port $SERVICE_CONNECT_DOREAMON_PORT --username $SERVICE_CONNECT_DOREAMON_USERNAME --password $SERVICE_CONNECT_DOREAMON_PASSWORD
+    environment:
+      TZ: Asia/Shanghai
+      MODE: production
+      PORT: $SERVICE_CONNECT_DOREAMON_PORT
+      SESSION_KEY: ${SERVICE_CONNECT_DOREAMON_SESSION_KEY}
+      SESSION_MAX_AGE: ${SERVICE_CONNECT_DOREAMON_SESSION_MAX_AGE}
+      CLIENT_ID: ${SERVICE_CONNECT_DOREAMON_CLIENT_ID}
+      CLIENT_SECRET: ${SERVICE_CONNECT_DOREAMON_CLIENT_SECRET}
+      REDIRECT_URI: ${SERVICE_CONNECT_DOREAMON_REDIRECT_URI}
+      UPSTREAM: ${SERVICE_CONNECT_DOREAMON_UPSTREAM}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress

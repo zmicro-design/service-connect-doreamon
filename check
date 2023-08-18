@@ -1,0 +1,23 @@
+#!/bin/bash
+
+service::config_set() {
+  config::check_or_set $1 $2 $SERVICE_CONFIG "${@:3}"
+}
+
+check() {
+  if [ "$DEBUG" = "true" ]; then
+    log::info "[DEBUG][service]: $SERVICE_CONFIG"
+    cat $SERVICE_CONFIG
+  fi
+
+  service::config_set SERVICE_CONNECT_DOREAMON_UPSTREAM text "Upstream"
+  
+  service::config_set SERVICE_CONNECT_DOREAMON_SESSION_KEY text "Session Key" $(os::random_string 8)
+  service::config_set SESSION_MAX_AGE text "Session Max Age (Unit: seconds, default: 30 day)" 2592000
+
+  service::config_set SERVICE_CONNECT_DOREAMON_CLIENT_ID text "Client ID"
+  service::config_set SERVICE_CONNECT_DOREAMON_CLIENT_SECRET text "Client Secret"
+  service::config_set SERVICE_CONNECT_DOREAMON_REDIRECT_URI text "Redirect URI"
+}
+
+check $@
