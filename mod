@@ -1,3 +1,3 @@
 NAME=connect-doreamon
-VERSION=v0.0.1
+VERSION=v0.0.2
 DESCRIPTION="connect-doreamon Service"
